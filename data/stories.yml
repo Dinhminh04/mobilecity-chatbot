@@ -1,0 +1,100 @@
+version: "3.1"
+
+stories:
+
+- story: chào hỏi
+  steps:
+    - intent: hello
+    - action: action_gemini_reply
+
+- story: hỏi iPhone
+  steps:
+    - intent: hoi_iphone
+    - action: action_gemini_reply
+
+- story: hỏi Samsung
+  steps:
+    - intent: hoi_samsung
+    - action: action_gemini_reply
+
+- story: hỏi OPPO
+  steps:
+    - intent: hoi_oppo
+    - action: action_gemini_reply
+
+- story: hỏi Xiaomi
+  steps:
+    - intent: hoi_xiaomi
+    - action: action_gemini_reply
+
+- story: hỏi máy tính bảng
+  steps:
+    - intent: hoi_may_tinh_bang
+    - action: action_gemini_reply
+
+- story: hỏi đồng hồ
+  steps:
+    - intent: hoi_dong_ho
+    - action: action_gemini_reply
+
+- story: hỏi phụ kiện
+  steps:
+    - intent: hoi_phu_kien
+    - action: action_gemini_reply
+
+- story: hỏi giá
+  steps:
+    - intent: hoi_gia
+    - action: action_gemini_reply
+
+- story: hỏi trả góp
+  steps:
+    - intent: hoi_tra_gop
+    - action: action_gemini_reply
+
+- story: hỏi bảo hành
+  steps:
+    - intent: hoi_bao_hanh
+    - action: action_gemini_reply
+
+- story: so sánh sản phẩm
+  steps:
+    - intent: so_sanh_san_pham
+    - action: action_gemini_reply
+
+- story: hỏi iPhone rồi so sánh
+  steps:
+    - intent: hoi_iphone
+    - action: action_gemini_reply
+    - intent: so_sanh_san_pham
+    - action: action_gemini_reply
+
+- story: đặt hàng
+  steps:
+    - intent: yeu_cau_dat_hang
+    - action: collect_lead_form
+    - active_loop: collect_lead_form
+    - active_loop: null
+    - action: action_save_lead
+
+- story: tư vấn xong đặt hàng
+  steps:
+    - intent: hoi_iphone
+    - action: action_gemini_reply
+    - intent: yeu_cau_dat_hang
+    - action: collect_lead_form
+    - active_loop: collect_lead_form
+    - active_loop: null
+    - action: action_save_lead
+
+- story: yêu cầu gặp nhân viên
+  steps:
+    - intent: yeu_cau_gap_nhan_vien
+    - action: action_trigger_handoff
+
+- story: tư vấn xong gặp nhân viên
+  steps:
+    - intent: hoi_samsung
+    - action: action_gemini_reply
+    - intent: yeu_cau_gap_nhan_vien
+    - action: action_trigger_handoff

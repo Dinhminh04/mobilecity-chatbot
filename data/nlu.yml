@@ -1,0 +1,312 @@
+version: "3.1"
+
+nlu:
+
+- intent: hello
+  examples: |
+    - xin chào
+    - chào
+    - hello
+    - hi
+    - hey
+    - cho hỏi
+    - cho mình hỏi
+    - bắt đầu
+    - alo
+    - bạn ơi
+    - shop ơi
+    - tư vấn giúp mình với
+    - mình cần tư vấn
+    - có ai tư vấn không
+    - mình muốn hỏi về điện thoại
+
+- intent: hoi_iphone
+  examples: |
+    - iPhone có những loại gì
+    - iPhone mới nhất là gì
+    - iPhone 16 giá bao nhiêu
+    - iPhone 15 Pro Max còn hàng không
+    - tư vấn iPhone cho mình
+    - mình muốn mua iPhone
+    - iPhone 16 Pro bao nhiêu tiền
+    - ip 16 giá bao nhiêu
+    - ip 15 pro max còn không
+    - iphone 14 còn hàng k
+    - iPhone xách tay giá thế nào
+    - iPhone chính hãng VN/A có không
+    - so sánh iPhone 15 và iPhone 16
+    - iPhone nào pin trâu nhất
+    - iPhone loại nào chụp ảnh đẹp
+    - mua iPhone trả góp được không
+    - iPhone 16 bao h về hàng
+    - có iPhone 16 Pro Max màu đen không
+    - iPhone 13 còn bán không
+    - ip 16 pro max giá bao nhiêu z
+
+- intent: hoi_samsung
+  examples: |
+    - Samsung có những dòng nào
+    - Samsung S25 Ultra giá bao nhiêu
+    - Samsung Galaxy A56 còn hàng không
+    - tư vấn Samsung cho mình
+    - mình muốn mua Samsung
+    - s25 ultra bao nhiêu tiền
+    - samsung s25 giá thế nào
+    - Samsung A series giá bao nhiêu
+    - Galaxy Z Fold còn không
+    - Samsung gập loại nào tốt
+    - s24 ultra vs s25 ultra cái nào tốt hơn
+    - samsung a55 giá bao nhiêu
+    - dòng Samsung tầm trung nào tốt
+    - Samsung pin trâu loại nào
+    - samsung chụp ảnh đẹp nhất là cái nào
+    - mua samsung trả góp được không
+    - samsung s25 còn hàng k
+    - Galaxy A56 5G giá bao nhiêu z
+    - samsung note còn bán không
+    - dòng samsung nào dưới 10 triệu
+
+- intent: hoi_oppo
+  examples: |
+    - OPPO có những dòng nào
+    - OPPO Reno 13 giá bao nhiêu
+    - tư vấn OPPO cho mình
+    - mình muốn mua OPPO
+    - oppo reno 12 còn hàng không
+    - OPPO Find X8 giá thế nào
+    - oppo a3 bao nhiêu tiền
+    - dòng OPPO nào chụp ảnh đẹp
+    - OPPO tầm trung loại nào tốt
+    - oppo reno 13 pro giá bao nhiêu
+    - OPPO có trả góp không
+    - oppo a60 còn không
+    - so sánh OPPO Reno 12 và Reno 13
+    - OPPO pin trâu nhất dòng nào
+    - oppo find x8 pro giá bao nhiêu z
+
+- intent: hoi_xiaomi
+  examples: |
+    - Xiaomi có những dòng nào
+    - Xiaomi 14T Pro giá bao nhiêu
+    - tư vấn Xiaomi cho mình
+    - mình muốn mua Xiaomi
+    - Redmi Note 13 còn hàng không
+    - POCO X6 giá thế nào
+    - xiaomi 14t bao nhiêu tiền
+    - dòng Xiaomi nào tốt tầm 10 triệu
+    - Xiaomi Redmi pin trâu không
+    - xiaomi 14t pro giá bao nhiêu
+    - Xiaomi có trả góp không
+    - redmi 13 còn hàng k
+    - so sánh Xiaomi 14T và 14T Pro
+    - xiaomi poco f6 giá bao nhiêu z
+    - dòng xiaomi nào chơi game tốt
+
+- intent: hoi_may_tinh_bang
+  examples: |
+    - iPad có những loại nào
+    - iPad Pro giá bao nhiêu
+    - tư vấn máy tính bảng cho mình
+    - mình muốn mua iPad
+    - Samsung Tab S9 còn hàng không
+    - iPad Air M2 giá thế nào
+    - ipad mini còn không
+    - máy tính bảng nào tốt nhất
+    - iPad học online loại nào phù hợp
+    - samsung tab s9 fe giá bao nhiêu
+    - iPad trả góp được không
+    - xiaomi pad 6 giá bao nhiêu
+    - so sánh iPad Air và iPad Pro
+    - máy tính bảng tầm 10 triệu loại nào tốt
+    - ipad gen 10 giá bao nhiêu z
+
+- intent: hoi_dong_ho
+  examples: |
+    - Apple Watch có những loại nào
+    - Apple Watch Series 9 giá bao nhiêu
+    - tư vấn đồng hồ thông minh cho mình
+    - mình muốn mua Apple Watch
+    - Samsung Galaxy Watch 7 còn hàng không
+    - Apple Watch Ultra 2 giá thế nào
+    - apple watch se bao nhiêu tiền
+    - đồng hồ thông minh nào tốt nhất
+    - Apple Watch đo nhịp tim được không
+    - samsung galaxy watch 6 giá bao nhiêu
+    - đồng hồ thông minh tầm 5 triệu loại nào
+    - apple watch series 9 còn hàng k
+    - so sánh Apple Watch và Samsung Watch
+    - apple watch ultra 2 giá bao nhiêu z
+
+- intent: hoi_phu_kien
+  examples: |
+    - AirPods có những loại nào
+    - AirPods Pro 2 giá bao nhiêu
+    - tư vấn phụ kiện cho mình
+    - mình muốn mua tai nghe
+    - ốp lưng iPhone 16 còn hàng không
+    - sạc nhanh 45W giá thế nào
+    - airpods gen 4 bao nhiêu tiền
+    - phụ kiện Samsung chính hãng có không
+    - cáp sạc Type C bao nhiêu
+    - tai nghe Samsung Galaxy Buds giá bao nhiêu
+    - airpods pro 2 còn hàng k
+    - kính cường lực iPhone 15 có không
+    - ốp lưng samsung s25 loại nào tốt
+    - sạc dự phòng chính hãng bao nhiêu
+
+- intent: hoi_gia
+  examples: |
+    - giá iPhone 16 bao nhiêu
+    - cho mình hỏi giá Samsung S25
+    - điện thoại tầm 10 triệu có gì
+    - điện thoại dưới 15 triệu nên mua gì
+    - điện thoại 5 triệu loại nào tốt
+    - tầm 20 triệu nên mua iPhone hay Samsung
+    - giá oppo reno 13 bao nhiêu
+    - xiaomi 14t giá bao nhiêu
+    - điện thoại tầm trung giá bao nhiêu
+    - bảng giá điện thoại mới nhất
+    - giá điện thoại samsung a56 bao nhiêu
+    - iphone 15 pro max bao nhiêu tiền
+    - hỏi giá ipad pro m4
+    - giá apple watch ultra 2
+
+- intent: hoi_tra_gop
+  examples: |
+    - mua trả góp được không
+    - trả góp lãi suất bao nhiêu
+    - trả góp 0% có không
+    - điều kiện trả góp là gì
+    - trả góp cần giấy tờ gì
+    - mua iPhone trả góp mấy tháng
+    - trả góp qua thẻ tín dụng được không
+    - duyệt trả góp mất bao lâu
+    - trả góp online được không
+    - mua samsung trả góp 12 tháng có không
+    - trả góp 0 đồng có không
+    - tra gop can gi khong
+    - mua điện thoại trả góp cần gì
+    - trả góp 24 tháng có không
+
+- intent: hoi_bao_hanh
+  examples: |
+    - bảo hành bao lâu
+    - chính sách bảo hành như thế nào
+    - bảo hành iPhone bao nhiêu tháng
+    - bảo hành Samsung mấy tháng
+    - bảo hành ở đâu
+    - điện thoại hỏng có đổi không
+    - bảo hành toàn cầu có không
+    - đổi trả trong bao lâu
+    - mua rồi có đổi được không
+    - bảo hành lỗi phần cứng có không
+    - bh 1 đổi 1 không
+    - điện thoại lỗi có được đổi máy mới không
+    - thời gian bảo hành samsung là bao nhiêu
+    - chính sách đổi trả 30 ngày có không
+
+- intent: so_sanh_san_pham
+  examples: |
+    - so sánh iPhone 16 và Samsung S25
+    - iPhone hay Samsung tốt hơn
+    - OPPO Reno 13 và Xiaomi 14T cái nào tốt
+    - so sánh iPad Air và iPad Pro
+    - iPhone 15 và iPhone 16 khác gì nhau
+    - Samsung S25 Ultra và iPhone 16 Pro Max cái nào tốt hơn
+    - so sánh 2 điện thoại cho mình
+    - chọn iPhone hay Samsung
+    - oppo hay xiaomi tốt hơn
+    - so sánh samsung a55 và a56
+    - iphone 16 pro vs 16 pro max khác gì
+    - realme hay oppo tốt hơn
+    - apple watch vs samsung watch cái nào tốt
+    - so sanh ip 16 va s25
+
+- intent: yeu_cau_dat_hang
+  examples: |
+    - tôi muốn đặt hàng
+    - mình muốn mua iPhone 16
+    - đặt Samsung S25 Ultra cho mình
+    - mình muốn order
+    - cho mình đặt cái này
+    - mua ngay
+    - tôi muốn mua cái này
+    - đặt hàng online được không
+    - mình chốt mua rồi
+    - order iPhone 16 Pro Max
+    - cho mình đặt OPPO Reno 13
+    - mình mua Samsung A56 nhé
+    - tôi muốn đặt iPad Pro
+    - chốt đơn luôn đi
+    - mình muốn mua ngay
+
+- intent: yeu_cau_gap_nhan_vien
+  examples: |
+    - cho mình gặp nhân viên
+    - tôi muốn nói chuyện với người thật
+    - gặp tư vấn viên
+    - kết nối nhân viên giúp mình
+    - cho mình gặp người tư vấn trực tiếp
+    - tôi cần hỗ trợ từ nhân viên
+    - chuyển sang nhân viên đi
+    - tôi không muốn chat với bot
+    - cho mình gặp staff
+    - nhân viên đâu rồi
+    - tư vấn viên ơi
+    - cho mình liên hệ trực tiếp
+    - mình cần người tư vấn thật
+    - gặp người thật đi
+
+- intent: kiem_tra_don_hang
+  examples: |
+    - kiểm tra đơn hàng của mình
+    - đơn hàng tới chưa
+    - đơn hàng mình đang ở đâu
+    - tracking đơn hàng
+    - đơn hàng bao giờ giao
+    - mình đặt hàng rồi bao giờ nhận
+    - xem trạng thái đơn hàng
+    - hàng ship bao lâu
+    - đơn mình chưa thấy giao
+    - kiểm tra order giúp mình
+    - mình đặt từ hôm qua chưa thấy giao
+
+
+- intent: out_of_scope
+  examples: |
+    - thời tiết hôm nay thế nào
+    - bạn có thể làm gì
+    - cho mình hỏi về xe máy
+    - giá vàng hôm nay
+    - laptop giá bao nhiêu
+    - tư vấn laptop cho mình
+    - mình muốn mua tivi
+    - điều hòa loại nào tốt
+    - mình hỏi chuyện khác được không
+    - bạn biết nấu ăn không
+
+- intent: affirm
+  examples: |
+    - đúng rồi
+    - ừ
+    - ok
+    - được
+    - có
+    - vâng
+    - yes
+    - đồng ý
+    - chính xác
+    - đúng
+
+- intent: deny
+  examples: |
+    - không
+    - không phải
+    - sai rồi
+    - không đúng
+    - thôi
+    - no
+    - không cần
+    - bỏ qua
+    - không muốn
+    - không cần thiết

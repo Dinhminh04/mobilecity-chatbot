@@ -1,0 +1,157 @@
+version: "3.9"
+
+# ─── Toàn bộ stack MobileCity Chatbot ────────────────────────
+#
+#   postgres      → Database lưu sản phẩm, đơn hàng, hội thoại
+#   rasa          → Rasa NLU + Core (port 5005)
+#   action-server → Custom Actions Python + Gemini (port 5055)
+#   backend       → FastAPI Admin API (port 8000)
+#   frontend      → Next.js Admin Dashboard (port 3000)
+#   website       → Next.js Website MobileCity + Chatbot (port 3002)
+#   nginx         → Reverse proxy (port 80)
+#
+# Khởi động: docker compose up --build
+# Admin:     http://localhost/
+# Website:   http://localhost/chat
+# API Docs:  http://localhost:8000/docs
+# Rasa:      http://localhost:5005
+# ─────────────────────────────────────────────────────────────
+
+services:
+
+  # ── PostgreSQL ─────────────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: mobilecity_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mobilecity_db
+      POSTGRES_USER: mobilecity
+      POSTGRES_PASSWORD: mobilecity123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mobilecity -d mobilecity_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mobilecity_net
+
+  # ── Rasa Action Server (Gemini + DB logging) ───────────────
+  action-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.actions
+    container_name: mobilecity_actions
+    restart: unless-stopped
+    ports:
+      - "5055:5055"
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-AIzaSyAgJ1ewzNt6ksFHRoXWEqDhrniV4riHB2I}
+      DATABASE_URL: postgresql://mobilecity:mobilecity123@postgres:5432/mobilecity_db
+    volumes:
+      - ./actions:/app/actions
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - mobilecity_net
+
+  # ── Rasa Server ────────────────────────────────────────────
+  rasa:
+    image: rasa/rasa:3.6.21-full
+    container_name: mobilecity_rasa
+    restart: unless-stopped
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./:/app
+    command: >
+      run
+      --enable-api
+      --cors "*"
+      --debug
+    depends_on:
+      - action-server
+    networks:
+      - mobilecity_net
+
+  # ── FastAPI Admin Backend ──────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mobilecity_backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://mobilecity:mobilecity123@postgres:5432/mobilecity_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    networks:
+      - mobilecity_net
+
+  # ── Next.js Admin Frontend ─────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mobilecity_frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - mobilecity_net
+
+  # ── Next.js Website MobileCity + Chatbot ───────────────────
+  website:
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    container_name: mobilecity_website
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_RASA_URL: http://localhost:5005
+    ports:
+      - "3002:3002"
+    depends_on:
+      - rasa
+    networks:
+      - mobilecity_net
+
+  # ── Nginx Reverse Proxy ────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: mobilecity_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - rasa
+      - backend
+      - frontend
+      - website
+    networks:
+      - mobilecity_net
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  mobilecity_net:
+    driver: bridge

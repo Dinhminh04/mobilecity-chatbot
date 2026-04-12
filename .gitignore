@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Rasa models 
+models/
+.rasa/
+.keras/
+
+# Node
+node_modules/
+.next/
+
+# Environment
+.env
+
+# Docker volumes
+pgdata/
+
+# Misc
+*.tar.gz
+.DS_Store

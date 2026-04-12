@@ -1,0 +1,118 @@
+version: "3.1"
+
+intents:
+  - hello
+  - hoi_iphone
+  - hoi_samsung
+  - hoi_oppo
+  - hoi_xiaomi
+  - hoi_may_tinh_bang
+  - hoi_dong_ho
+  - hoi_phu_kien
+  - hoi_gia
+  - hoi_tra_gop
+  - hoi_bao_hanh
+  - so_sanh_san_pham
+  - yeu_cau_dat_hang
+  - yeu_cau_gap_nhan_vien
+  - kiem_tra_don_hang
+  - out_of_scope
+  - affirm
+  - deny
+
+entities:
+  - product
+  - budget
+
+slots:
+  name:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: collect_lead_form
+            requested_slot: name
+
+  phone:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: collect_lead_form
+            requested_slot: phone
+
+  address:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: collect_lead_form
+            requested_slot: address
+
+  product:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: product
+      - type: from_text
+        conditions:
+          - active_loop: collect_lead_form
+            requested_slot: product
+
+  budget:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: budget
+
+forms:
+  collect_lead_form:
+    required_slots:
+      - name
+      - phone
+      - address
+      - product
+
+actions:
+  - action_save_lead
+  - action_calculate_quote
+  - action_trigger_handoff
+  - validate_collect_lead_form
+  - action_gemini_reply
+
+responses:
+  utter_hello:
+    - text: |
+        Xin chào! Tôi là trợ lý tư vấn của MobileCity.
+        Tôi có thể hỗ trợ anh/chị tìm điện thoại phù hợp, so sánh sản phẩm hoặc đặt hàng.
+
+  utter_ask_name:
+    - text: "Anh/chị vui lòng cho biết họ tên?"
+
+  utter_ask_phone:
+    - text: "Số điện thoại liên hệ của anh/chị?"
+
+  utter_ask_address:
+    - text: "Địa chỉ giao hàng của anh/chị?"
+
+  utter_ask_product:
+    - text: "Anh/chị muốn đặt sản phẩm nào?"
+
+  utter_done:
+    - text: |
+        Đã ghi nhận đơn hàng của anh/chị.
+        Nhân viên MobileCity sẽ liên hệ xác nhận trong vòng 30 phút.
+
+  utter_handoff:
+    - text: |
+        Đang kết nối anh/chị với nhân viên tư vấn MobileCity.
+        Vui lòng chờ trong giây lát.
+
+  utter_fallback:
+    - text: |
+        Xin lỗi, mình chưa nắm được ý anh/chị muốn hỏi.
+        Anh/chị có thể hỏi về: iPhone, Samsung, OPPO, Xiaomi, iPad, giá, trả góp hoặc đặt hàng.
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,108 @@
+version: "3.1"
+
+rules:
+
+- rule: Chào hỏi
+  steps:
+    - intent: hello
+    - action: action_gemini_reply
+
+- rule: Hỏi iPhone
+  steps:
+    - intent: hoi_iphone
+    - action: action_gemini_reply
+
+- rule: Hỏi Samsung
+  steps:
+    - intent: hoi_samsung
+    - action: action_gemini_reply
+
+- rule: Hỏi OPPO
+  steps:
+    - intent: hoi_oppo
+    - action: action_gemini_reply
+
+- rule: Hỏi Xiaomi
+  steps:
+    - intent: hoi_xiaomi
+    - action: action_gemini_reply
+
+- rule: Hỏi máy tính bảng
+  steps:
+    - intent: hoi_may_tinh_bang
+    - action: action_gemini_reply
+
+- rule: Hỏi đồng hồ thông minh
+  steps:
+    - intent: hoi_dong_ho
+    - action: action_gemini_reply
+
+- rule: Hỏi phụ kiện
+  steps:
+    - intent: hoi_phu_kien
+    - action: action_gemini_reply
+
+- rule: Hỏi giá
+  steps:
+    - intent: hoi_gia
+    - action: action_gemini_reply
+
+- rule: Hỏi trả góp
+  steps:
+    - intent: hoi_tra_gop
+    - action: action_gemini_reply
+
+- rule: Hỏi bảo hành
+  steps:
+    - intent: hoi_bao_hanh
+    - action: action_gemini_reply
+
+- rule: So sánh sản phẩm
+  steps:
+    - intent: so_sanh_san_pham
+    - action: action_gemini_reply
+
+- rule: Kiểm tra đơn hàng
+  steps:
+    - intent: kiem_tra_don_hang
+    - action: action_gemini_reply
+
+- rule: Câu hỏi ngoài phạm vi
+  steps:
+    - intent: out_of_scope
+    - action: action_gemini_reply
+
+- rule: Kích hoạt form đặt hàng
+  steps:
+    - intent: yeu_cau_dat_hang
+    - action: collect_lead_form
+    - active_loop: collect_lead_form
+
+- rule: Submit form khi điền đủ thông tin
+  condition:
+    - active_loop: collect_lead_form
+  steps:
+    - action: collect_lead_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_save_lead
+
+- rule: Yêu cầu gặp nhân viên
+  steps:
+    - intent: yeu_cau_gap_nhan_vien
+    - action: action_trigger_handoff
+
+- rule: Fallback dùng Gemini
+  steps:
+    - intent: nlu_fallback
+    - action: action_gemini_reply
+
+- rule: Thoát form khi fallback
+  condition:
+    - active_loop: collect_lead_form
+  steps:
+    - intent: nlu_fallback
+    - action: action_deactivate_loop
+    - active_loop: null
+    - action: action_gemini_reply
