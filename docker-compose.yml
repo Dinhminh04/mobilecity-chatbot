@@ -51,7 +51,7 @@ services:
     ports:
       - "5055:5055"
     environment:
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-AIzaSyAgJ1ewzNt6ksFHRoXWEqDhrniV4riHB2I}
+     GEMINI_API_KEY: ${GEMINI_API_KEY}
       DATABASE_URL: postgresql://mobilecity:mobilecity123@postgres:5432/mobilecity_db
     volumes:
       - ./actions:/app/actions
