@@ -1,21 +1,5 @@
 version: "3.9"
 
-# ─── Toàn bộ stack MobileCity Chatbot ────────────────────────
-#
-#   postgres      → Database lưu sản phẩm, đơn hàng, hội thoại
-#   rasa          → Rasa NLU + Core (port 5005)
-#   action-server → Custom Actions Python + Gemini (port 5055)
-#   backend       → FastAPI Admin API (port 8000)
-#   frontend      → Next.js Admin Dashboard (port 3000)
-#   website       → Next.js Website MobileCity + Chatbot (port 3002)
-#   nginx         → Reverse proxy (port 80)
-#
-# Khởi động: docker compose up --build
-# Admin:     http://localhost/
-# Website:   http://localhost/chat
-# API Docs:  http://localhost:8000/docs
-# Rasa:      http://localhost:5005
-# ─────────────────────────────────────────────────────────────
 
 services:
 
