@@ -1,7 +1,4 @@
--- =============================================
--- MobileCity Chatbot Database Schema
--- PostgreSQL Init Script
--- =============================================
+
 
 -- Bảng sản phẩm
 CREATE TABLE IF NOT EXISTS products (
